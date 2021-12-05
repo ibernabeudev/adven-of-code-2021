@@ -31,6 +31,27 @@ func countDepthMeasurenmentIncrements(input []int) int {
 	return count
 }
 
+func countDepthMeasurenmentIncrementsWindow(input []int) int {
+	counter := 0
+	previousGroupMeasure := input[0] + input[1] + input[2]
+
+	for i := range input[2:] {
+		if len(input[i:]) < 3 {
+			break
+		}
+
+		nextGroupSum := input[i] + input[i+1] + input[i+2]
+
+		if nextGroupSum > previousGroupMeasure {
+			counter++
+		}
+
+		previousGroupMeasure = nextGroupSum
+	}
+
+	return counter
+}
+
 func main() {
 	file, err := os.Open("input.txt")
 	if err != nil {
@@ -53,4 +74,5 @@ func main() {
 	}
 
 	log.Println(countDepthMeasurenmentIncrements(input))
+	log.Println(countDepthMeasurenmentIncrementsWindow(input))
 }

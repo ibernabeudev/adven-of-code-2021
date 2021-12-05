@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestPuzzle(t *testing.T) {
+func TestCountDepthMeasurenmentIncrements(t *testing.T) {
 	tests := map[string]struct {
 		input []int
 		want  int
@@ -18,6 +18,27 @@ func TestPuzzle(t *testing.T) {
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
 			got := countDepthMeasurenmentIncrements(tc.input)
+			if got != tc.want {
+				t.Fatalf("%s: expected: %v, got: %v", name, tc.want, got)
+			}
+		})
+	}
+}
+
+func TestCountDepthMeasurenmentIncrementsWindow(t *testing.T) {
+	tests := map[string]struct {
+		input []int
+		want  int
+	}{
+		"complex": {
+			input: []int{199, 200, 208, 210, 200, 207, 240, 269, 260, 263},
+			want:  5,
+		},
+	}
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			got := countDepthMeasurenmentIncrementsWindow(tc.input)
 			if got != tc.want {
 				t.Fatalf("%s: expected: %v, got: %v", name, tc.want, got)
 			}
